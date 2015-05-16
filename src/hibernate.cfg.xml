@@ -19,7 +19,8 @@
     	<property name="format_sql">true</property>
     	<!-- 制定自动生成数据表策略 -->
     	<property name="hbm2ddl.auto">update</property>
-    	
+    	<!-- 设置数据库的隔离级别 -->
+    	<property name="connection.isolation">2</property>
     	<!-- 制定Mapping映射文件 -->
     	<mapping resource="com/dm/hibernate/helloword/News.hbm.xml"/>
     </session-factory>

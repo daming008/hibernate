@@ -68,4 +68,12 @@ public class HibernateTest {
 		News news1 = (News) session.get(News.class, 1);
 		news1.setAuthor("ldm");
 	}
+	
+	@Test
+	public void testSessionRefresh(){
+		News news = (News) session.get(News.class, 1);
+		System.out.println(news);
+		session.refresh(news);
+		System.out.println(news);
+	}
 }
