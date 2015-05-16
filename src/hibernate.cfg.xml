@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+    	<!-- 配置连接数据库的基本信息 -->
+    	<property name="connection.username">root</property>
+    	<property name="connection.password">111111</property>
+    	<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+    	<property name="connection.url">jdbc:mysql://192.168.1.200:3306/hibernate</property>
+    	
+    	<!-- 配置Hibernate基本信息 -->
+    	<!-- 方言 -->
+    	<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+    	<!-- 执行操作时是否在控制台打印SQL -->
+    	<property name="show_sql">true</property>
+    	<!-- 是否对SQL进行格式化 -->
+    	<property name="format_sql">true</property>
+    	<!-- 制定自动生成数据表策略 -->
+    	<property name="hbm2ddl.auto">update</property>
+    	
+    	<!-- 制定Mapping映射文件 -->
+    	<mapping resource="com/dm/hibernate/helloword/News.hbm.xml"/>
+    </session-factory>
+</hibernate-configuration>
