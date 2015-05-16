@@ -14,7 +14,7 @@
         <property name="author" type="java.lang.String">
             <column name="AUTHOR" />
         </property>
-        <property name="mydate" type="java.sql.Date">
+        <property name="mydate" type="java.util.Date">
             <column name="MYDATE" />
         </property>
     </class>

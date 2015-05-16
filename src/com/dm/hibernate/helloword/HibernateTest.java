@@ -2,7 +2,7 @@ package com.dm.hibernate.helloword;
 
 import static org.junit.Assert.*;
 
-import java.sql.Date;
+import java.util.Date;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -43,7 +43,7 @@ public class HibernateTest {
 	@Test
 	public void test() {
 		
-		News news = new News("java", "ldm", new Date(new java.util.Date().getTime()));
+		News news = new News("java", "ldm", new Date());
 		session.save(news);
 		
 		

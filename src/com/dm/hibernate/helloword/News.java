@@ -1,6 +1,6 @@
 package com.dm.hibernate.helloword;
 
-import java.sql.Date;
+import java.util.Date;;
 
 public class News {
 	private Integer id;
