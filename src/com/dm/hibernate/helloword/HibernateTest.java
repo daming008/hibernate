@@ -10,28 +10,42 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 public class HibernateTest {
-
-	@Test
-	public void test() {
-		SessionFactory sessionFactory = null;
+	
+	private SessionFactory sessionFactory;
+	private Session session;
+	private Transaction transaction;
+	
+	@Before
+	public void init(){
 		Configuration configuration = new Configuration().configure();
 		ServiceRegistry serviceRegistry = 
 				new ServiceRegistryBuilder().applySettings(configuration.getProperties())
-											.buildServiceRegistry();
+				.buildServiceRegistry();
 		sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 		
-		Session session = sessionFactory.openSession();
-		Transaction transaction = session.beginTransaction();
+		session = sessionFactory.openSession();
+		transaction = session.beginTransaction();
+		
+	}
+	
+	@After
+	public void destory(){
+		transaction.commit();
+		session.close();
+		sessionFactory.close();
+	}
+
+	@Test
+	public void test() {
 		
 		News news = new News("java", "ldm", new Date(new java.util.Date().getTime()));
 		session.save(news);
 		
-		transaction.commit();
-		session.close();
-		sessionFactory.close();
 		
 		
 	}
