@@ -29,9 +29,6 @@ public class HibernateTest {
 		News news = new News("java", "ldm", new Date(new java.util.Date().getTime()));
 		session.save(news);
 		
-		News news2 = (News) session.get(News.class, 1);
-		System.out.println(news2);
-		
 		transaction.commit();
 		session.close();
 		sessionFactory.close();
