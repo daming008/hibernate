@@ -39,6 +39,18 @@ public class HibernateTest {
 		session.close();
 		sessionFactory.close();
 	}
+	
+	@Test
+	public void testSessionUpdate(){
+		News news = (News) session.get(News.class, 1);
+		transaction.commit();
+		session.close();
+		session = sessionFactory.openSession();
+		transaction = session.beginTransaction();
+		News news2 = (News) session.get(News.class, 2);
+		session.update(news);
+		news2.setAuthor("dm2");
+	}
 
 	@Test
 	public void testINsertData() {
