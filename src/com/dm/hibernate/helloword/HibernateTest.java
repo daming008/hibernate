@@ -41,6 +41,26 @@ public class HibernateTest {
 	}
 	
 	@Test
+	public void testComponent(){
+		Worker worker = new Worker();
+		Pay pay = new Pay();
+		pay.setMonthPay(8000);
+		pay.setYearPay(150000);
+		pay.setVocationWithPay(20);
+		
+		worker.setName("LDM");
+		worker.setPay(pay);
+		
+		session.save(worker);
+	}
+	
+	@Test
+	public void testDynamicUpdate(){
+		News news = (News) session.get(News.class, 1);
+		news.setAuthor("AAA");
+	}
+	
+	@Test
 	public void testSessionUpdate(){
 		News news = (News) session.get(News.class, 1);
 		transaction.commit();
