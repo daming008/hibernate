@@ -22,7 +22,8 @@
     	<!-- 设置数据库的隔离级别 -->
     	<property name="connection.isolation">2</property>
     	<!-- 制定Mapping映射文件 -->
-    	<mapping resource="com/dm/hibernate/helloword/News.hbm.xml"/>
-    	<mapping resource="com/dm/hibernate/helloword/Worker.hbm.xml"/>
+    	
+    	<mapping resource="com/dm/hibernate/entities/n21/both/Customer.hbm.xml"/>
+    	<mapping resource="com/dm/hibernate/entities/n21/both/Order.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>
