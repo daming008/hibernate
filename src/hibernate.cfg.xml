@@ -18,19 +18,24 @@
     	<!-- 是否对SQL进行格式化 -->
     	<property name="format_sql">true</property>
     	<!-- 制定自动生成数据表策略 -->
-    	<property name="hbm2ddl.auto">create</property>
+    	<property name="hbm2ddl.auto">update</property>
     	<!-- 设置数据库的隔离级别 -->
     	<property name="connection.isolation">2</property>
     	<!-- 制定Mapping映射文件 -->
-    	
+
+		<mapping resource="com/dm/hibernate/strategy/Customer.hbm.xml"/>    	
+		<mapping resource="com/dm/hibernate/strategy/Order.hbm.xml"/>    	
     	<!--  
     	<mapping resource="com/dm/hibernate/entities/n21/both/Customer.hbm.xml"/>
     	<mapping resource="com/dm/hibernate/entities/n21/both/Order.hbm.xml"/>
     	<mapping resource="com/dm/hibernate/one2one/primary/Manager.hbm.xml"/>
     	<mapping resource="com/dm/hibernate/one2one/primary/Department.hbm.xml"/>
-    	-->
     	<mapping resource="com/dm/hibernate/n2n/Category.hbm.xml"/>
     	<mapping resource="com/dm/hibernate/n2n/Item.hbm.xml"/>
+    	<mapping resource="com/dm/hibernate/subclass/Person.hbm.xml"/>
+    	<mapping resource="com/dm/hibernate/joined/subclass/Person.hbm.xml"/>
+    	<mapping resource="com/dm/hibernate/union/subclass/Person.hbm.xml"/>
+    	-->
     	
     </session-factory>
 </hibernate-configuration>
