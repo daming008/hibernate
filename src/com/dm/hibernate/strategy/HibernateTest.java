@@ -54,6 +54,11 @@ public class HibernateTest {
 	}
 	
 	@Test
+	public void testConnection(){
+		
+	}
+	
+	@Test
 	public void testSetFetch2(){
 		Customer customer = (Customer) session.get(Customer.class, 1);
 		System.out.println(customer.getOrders().size());
