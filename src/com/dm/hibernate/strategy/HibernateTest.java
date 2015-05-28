@@ -60,6 +60,7 @@ public class HibernateTest {
 	}
 	@Test
 	public void testSetFetch(){
+		@SuppressWarnings("unchecked")
 		List<Customer> customers = session.createQuery("FROM Customer").list();
 		System.out.println(customers.size());
 		for(Customer customer : customers){
