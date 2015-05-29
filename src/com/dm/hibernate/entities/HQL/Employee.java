@@ -47,6 +47,15 @@ public class Employee {
 	public void setDept(Department dept) {
 		this.dept = dept;
 	}
+	
+	
+
+	public Employee(String email, float salary, Department dept) {
+		super();
+		this.salary = salary;
+		this.email = email;
+		this.dept = dept;
+	}
 
 	@Override
 	public String toString() {

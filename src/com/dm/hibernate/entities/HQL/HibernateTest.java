@@ -46,6 +46,29 @@ public class HibernateTest {
 	}
 	
 	@Test
+	public void testReport(){
+		String hql = "SELECT min(e.salary),max(e.salary) from Employee e where e.salary > :salary "
+				+ "GROUP BY e.dept";
+		List<Object[]> result = session.createQuery(hql).setFloat("salary", 8000).list();
+		for(Object[] objs : result){
+			System.out.println(Arrays.asList(objs));
+		}
+	}
+	
+	@Test
+	public void testShadow(){
+		Query query = session.createQuery("SELECT new Employee(e.email,e.salary,e.dept) FROM "
+				+ "Employee e where e.salary > :salary and e.dept=:dept");
+		Department dept = new Department();
+		dept.setId(80);
+		List<Employee> result = query.setEntity("dept", dept).setFloat("salary", 8000).list();
+		
+		for(Employee emp: result){
+			System.out.println(emp.getId()+"::"+emp.getEmail()+"::"+emp.getSalary()+"::"+emp.getDept());
+		}
+	}
+	
+	@Test
 	public void testFieldQuery(){
 		Query query = session.createQuery("SELECT e.email,e.salary,e.dept FROM Employee e where e.dept=:dept");
 		Department dept = new Department();
