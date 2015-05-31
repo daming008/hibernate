@@ -9,11 +9,13 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.mapping.DependantValue;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
@@ -45,6 +47,38 @@ public class HibernateTest {
 		transaction.commit();
 		session.close();
 		sessionFactory.close();
+	}
+	@Test
+	public void testSecondLevelCache(){
+		Employee emp1 = (Employee) session.get(Employee.class, 100);
+		System.out.println(emp1.getName());
+		
+		transaction.commit();
+		session.close();
+		
+		session = sessionFactory.openSession();
+		transaction = session.beginTransaction();
+		
+		Employee emp2 = (Employee) session.get(Employee.class, 100);
+		System.out.println(emp2.getName());
+	}
+	
+	@Test
+	public void testNativeSQL(){//本地SQL
+		String sql ="INSERT into gg_department values(?,?)";
+		Query query = session.createSQLQuery(sql);
+		query.setInteger(0, 280).setString(1, "Lideing").executeUpdate();
+	}
+	
+	@Test
+	public void testQBC(){
+		//创建一个Criteria对象
+		Criteria criteria = session.createCriteria(Employee.class);
+//		criteria.add(Restrictions.eq("email", "HBAER"));
+		criteria.add(Restrictions.gt("salary", 5000F));
+		
+		List<Employee> employees = criteria.list();
+		System.out.println(employees);
 	}
 	
 	@Test

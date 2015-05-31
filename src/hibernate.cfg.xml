@@ -28,10 +28,17 @@
     	<property name="hbm2ddl.auto">update</property>
     	<!-- 设置数据库的隔离级别 -->
     	<property name="connection.isolation">2</property>
+    	
+    	<!-- 配置开启使用二级缓存 -->
+    	<property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property>
     	<!-- 制定Mapping映射文件 -->
 		
 		<mapping resource="com/dm/hibernate/entities/HQL/Department.hbm.xml"/>
 		<mapping resource="com/dm/hibernate/entities/HQL/Employee.hbm.xml"/>
+		<!-- 也可在对应的.hbm文件中配置 -->
+		<!--  
+		<class-cache usage="read-write" class="com.dm.hibernate.entities.HQL.Employee"/>
+		-->
     	<!--  
 		<mapping resource="com/dm/hibernate/strategy/Customer.hbm.xml"/>    	
 		<mapping resource="com/dm/hibernate/strategy/Order.hbm.xml"/>    	
