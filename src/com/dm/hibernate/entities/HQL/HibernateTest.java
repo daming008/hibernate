@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -43,6 +45,30 @@ public class HibernateTest {
 		transaction.commit();
 		session.close();
 		sessionFactory.close();
+	}
+	
+	@Test
+	public void testLeftJoinFetch2(){
+		String hql = "select e from Employee e inner join e.dept";
+		Query query = session.createQuery(hql);
+		List<Employee> emps = query.list();
+		int i=0;
+		for(Employee emp : emps){
+			System.out.println(emp.getName()+"::"+emp.getDept().getName()+":::"+i);
+			i++;
+			
+		}
+	}
+	
+	@Test
+	public void testLeftJoinFetch(){
+//		String hql = "SELECT DISTINCT d FROM Department d left join fetch d.emps";
+		String hql = "FROM Department d inner join fetch d.emps";
+		List<Department> depts = session.createQuery(hql).list();
+		depts = new ArrayList<>(new LinkedHashSet(depts));
+		for(Department dep:depts){
+			System.out.println(dep.getName()+":"+dep.getEmps().size());
+		}
 	}
 	
 	@Test

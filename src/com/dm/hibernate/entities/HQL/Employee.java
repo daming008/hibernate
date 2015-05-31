@@ -56,6 +56,10 @@ public class Employee {
 		this.email = email;
 		this.dept = dept;
 	}
+	
+	public Employee() {
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public String toString() {
