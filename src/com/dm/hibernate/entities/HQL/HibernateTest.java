@@ -2,6 +2,8 @@ package com.dm.hibernate.entities.HQL;
 
 import static org.junit.Assert.*;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -16,12 +18,15 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.jdbc.Work;
 import org.hibernate.mapping.DependantValue;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import com.dm.hibernate.DAO.DepartmentDAO;
 
 public class HibernateTest {
 	
@@ -47,6 +52,58 @@ public class HibernateTest {
 		transaction.commit();
 		session.close();
 		sessionFactory.close();
+	}
+	
+	@Test
+	public void testBench(){
+		session.doWork(new Work() {
+			
+			@Override
+			public void execute(Connection con) throws SQLException {
+				System.out.println(con);
+				System.out.println(con);
+				System.out.println(con);
+			}
+		});
+	}
+	
+	@Test
+	public void testDepaermentManage(){
+		DepartmentDAO departmentDAO = new DepartmentDAO();
+		Department dept = new Department();
+		dept.setName("LDM");
+		departmentDAO.save(dept);
+		departmentDAO.save(dept);
+		departmentDAO.save(dept);
+	}
+	
+	@Test
+	public void testQueryCache(){
+		Query query = session.createQuery("FROM Employee");
+		query.setCacheable(true);
+		List<Employee> emp1 = query.list();
+		System.out.println(emp1.size());
+		//设置开启
+		emp1 = query.list();
+		System.out.println(emp1.size());
+		
+	}
+	@Test
+	public void testCollectionLevelCache(){
+		Department dept1 = (Department) session.get(Department.class, 80);
+		System.out.println(dept1);
+		System.out.println(dept1.getEmps().size());
+		
+		transaction.commit();
+		session.close();
+		
+		session = sessionFactory.openSession();
+		transaction = session.beginTransaction();
+		
+		Department dept2 = (Department) session.get(Department.class, 80);
+		System.out.println(dept2);
+		System.out.println(dept2.getEmps().size());
+		
 	}
 	@Test
 	public void testSecondLevelCache(){

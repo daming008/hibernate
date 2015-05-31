@@ -29,8 +29,15 @@
     	<!-- 设置数据库的隔离级别 -->
     	<property name="connection.isolation">2</property>
     	
-    	<!-- 配置开启使用二级缓存 -->
+    	<!-- 配置开启使用二级缓存 的产品-->
     	<property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property>
+    	
+    	<!-- 配置管理session的方式 -->
+    	<property name="current_session_context_class">thread</property>
+    	
+    	<!-- 开启查询缓存 -->
+    	<property name="cache.use_query_cache">true</property>
+    	
     	<!-- 制定Mapping映射文件 -->
 		
 		<mapping resource="com/dm/hibernate/entities/HQL/Department.hbm.xml"/>
@@ -39,6 +46,9 @@
 		<!--  
 		<class-cache usage="read-write" class="com.dm.hibernate.entities.HQL.Employee"/>
 		-->
+		<class-cache usage="read-write" class="com.dm.hibernate.entities.HQL.Employee"/>
+		<class-cache usage="read-write" class="com.dm.hibernate.entities.HQL.Department"/>
+		<collection-cache usage="read-write" collection="com.dm.hibernate.entities.HQL.Department.emps"/>
     	<!--  
 		<mapping resource="com/dm/hibernate/strategy/Customer.hbm.xml"/>    	
 		<mapping resource="com/dm/hibernate/strategy/Order.hbm.xml"/>    	
@@ -52,6 +62,8 @@
     	<mapping resource="com/dm/hibernate/joined/subclass/Person.hbm.xml"/>
     	<mapping resource="com/dm/hibernate/union/subclass/Person.hbm.xml"/>
     	-->
+    	
+    	
     	
     </session-factory>
 </hibernate-configuration>
